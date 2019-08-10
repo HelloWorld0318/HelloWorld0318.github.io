@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="挥斥方遒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="转载自深入Java字符串Java字符串类(java.lang.String)是Java中使用最多的类，也是最为特殊的一个类，很多时候，我们对它既熟悉又陌生。 从根本上认识java.lang.String类和String池 首先，我建议先看看String类的源码实现，这是从本质上认识String类的根本出发点。从中可以看到：1、String类是final的，不可被继承。public final cl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String">
+<meta property="og:url" content="http://yoursite.com/2017/08/08/Java/String/index.html">
+<meta property="og:site_name" content="挥斥方遒">
+<meta property="og:description" content="转载自深入Java字符串Java字符串类(java.lang.String)是Java中使用最多的类，也是最为特殊的一个类，很多时候，我们对它既熟悉又陌生。 从根本上认识java.lang.String类和String池 首先，我建议先看看String类的源码实现，这是从本质上认识String类的根本出发点。从中可以看到：1、String类是final的，不可被继承。public final cl">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/200806031212461149019.jpg">
+<meta property="og:image" content="http://yoursite.com/img/200907171247801310703.png">
+<meta property="og:updated_time" content="2018-09-13T15:05:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="String">
+<meta name="twitter:description" content="转载自深入Java字符串Java字符串类(java.lang.String)是Java中使用最多的类，也是最为特殊的一个类，很多时候，我们对它既熟悉又陌生。 从根本上认识java.lang.String类和String池 首先，我建议先看看String类的源码实现，这是从本质上认识String类的根本出发点。从中可以看到：1、String类是final的，不可被继承。public final cl">
+<meta name="twitter:image" content="http://yoursite.com/img/200806031212461149019.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/08/Java/String/">
+
+
+
+
+
+  <title>String | 挥斥方遒</title>
+  
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">挥斥方遒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">CODING MY AMBITION</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/08/Java/String/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="挥斥方遒">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/20170511153115.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="挥斥方遒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">String</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-08T13:24:44+08:00">
+                2017-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java语言学习/" itemprop="url" rel="index">
+                    <span itemprop="name">Java语言学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转载自<a href="http://lavasoft.blog.51cto.com/62575/80034/" target="_blank" rel="noopener">深入Java字符串</a><br>Java字符串类(java.lang.String)是Java中使用最多的类，也是最为特殊的一个类，很多时候，我们对它既熟悉又陌生。</p>
+<h2 id="从根本上认识java-lang-String类和String池"><a href="#从根本上认识java-lang-String类和String池" class="headerlink" title="从根本上认识java.lang.String类和String池"></a>从根本上认识java.lang.String类和String池</h2><blockquote>
+<p>首先，我建议先看看String类的源码实现，这是从本质上认识String类的根本出发点。从中可以看到：<br>1、String类是final的，不可被继承。public final class String。<br>2、String类是的本质是字符数组char[], 并且其值不可改变。private final char value[];<br>然后打开String类的API文档，可以发现：<br>3、String类对象有个特殊的创建的方式，就是直接指定比如String x = “abc”，”abc”就表示一个字符串对象。而x是”abc”对象的地址，也叫做”abc”对象的引用。<br>4、String对象可以通过“+”串联。串联后会生成新的字符串。也可以通过concat()来串联，这个后面会讲述。<br>5、创建字符串的方式很多，归纳起来有三类：<br>其一，使用new关键字创建字符串，比如String s1 = new String(“abc”);<br>其二，直接指定。比如String s2 = “abc”;<br>其三，使用串联生成新的字符串。比如String s3 = “ab” + “c”;<br>6、Java运行时会维护一个String Pool（String池），JavaDoc翻译很模糊“字符串缓冲区”。String池用来存放运行时中产生的各种字符串，并且池中的字符串的内容不重复。而一般对象不存在这个缓冲池，并且创建的对象仅仅存在于方法的堆栈区。下面是个系统内存示意图：<br><img src="/img/200806031212461149019.jpg" alt></p>
+</blockquote>
+<h2 id="String对象的创建"><a href="#String对象的创建" class="headerlink" title="String对象的创建"></a>String对象的创建</h2><p>String对象的创建也很讲究，关键是要明白其原理。<br>原理1：当使用任何方式来创建一个字符串对象s时，Java运行时（运行中JVM）会拿着这个X在String池中找是否存在内容相同的字符串对象，如果不存在，则在池中创建一个字符串s，否则，不在池中添加。<br>原理2：Java中，只要使用new关键字来创建对象，则一定会（在堆区或栈区）创建一个新的对象。<br>原理3：使用直接指定或者使用纯字符串串联来创建String对象，则仅仅会检查维护String池中的字符串，池中没有就在池中创建一个，有则罢了！但绝不会在堆栈区再去创建该String对象。<br>原理4：使用包含变量的表达式来创建String对象，则不仅会检查维护String池，而且还会在堆栈区创建一个String对象。<br>另外，String的intern()方法是一个本地方法，定义为public native String intern(); intern()方法的价值在于让开发者能将注意力集中到String池上。当调用 intern 方法时，如果池已经包含一个等于此 String 对象的字符串（该对象由 equals(Object) 方法确定），则返回池中的字符串。否则，将此 String 对象添加到池中，并且返回此 String 对象的引用。</p>
+<h2 id="认识trim-、intern-和concat-、“-”-认识空格、空串、null"><a href="#认识trim-、intern-和concat-、“-”-认识空格、空串、null" class="headerlink" title="认识trim()、intern()和concat()、“+”,认识空格、空串、null"></a>认识trim()、intern()和concat()、“+”,认识空格、空串、null</h2><p>下面看个例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">* Created by IntelliJ IDEA.&lt;br&gt; </span></span><br><span class="line"><span class="comment">* &lt;b&gt;User&lt;/b&gt;: leizhimin&lt;br&gt; </span></span><br><span class="line"><span class="comment">* &lt;b&gt;Date&lt;/b&gt;: 2008-6-2 22:14:16&lt;br&gt; </span></span><br><span class="line"><span class="comment">* &lt;b&gt;Note&lt;/b&gt;: Please add comment here! </span></span><br><span class="line"><span class="comment">*/</span> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; </span><br><span class="line">        <span class="comment">//在池中和堆中分别创建String对象"abc",s1指向堆中对象 </span></span><br><span class="line">        String s1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>); </span><br><span class="line">        <span class="comment">//s2直接指向池中对象"abc" </span></span><br><span class="line">        String s2 = <span class="string">"abc"</span>; </span><br><span class="line">        <span class="comment">//在堆中新创建"abc"对象，s3指向该对象 </span></span><br><span class="line">        String s3 = <span class="keyword">new</span> String(<span class="string">"abc"</span>); </span><br><span class="line">        <span class="comment">//在池中创建对象"ab" 和 "c"，并且s4指向池中对象"abc" </span></span><br><span class="line">        String s4 = <span class="string">"ab"</span> + <span class="string">"c"</span>; </span><br><span class="line">        <span class="comment">//c指向池中对象"c" </span></span><br><span class="line">        String c = <span class="string">"c"</span>; </span><br><span class="line">        <span class="comment">//在堆中创建新的对象"abc"，并且s5指向该对象 </span></span><br><span class="line">        String s5 = <span class="string">"ab"</span> + c; </span><br><span class="line">		<span class="comment">//concat会创建一个新的 String 对象返回</span></span><br><span class="line">        String s6 = <span class="string">"ab"</span>.concat(<span class="string">"c"</span>); </span><br><span class="line">        String s7 = <span class="string">"ab"</span>.concat(c); </span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"------------实串-----------"</span>); </span><br><span class="line">        System.out.println(s1 == s2); <span class="comment">//false </span></span><br><span class="line">        System.out.println(s1 == s3); <span class="comment">//false </span></span><br><span class="line">        System.out.println(s2 == s3); <span class="comment">//false </span></span><br><span class="line">        System.out.println(s2 == s4); <span class="comment">//true </span></span><br><span class="line">        System.out.println(s2 == s5); <span class="comment">//false </span></span><br><span class="line">        System.out.println(s2 == s6); <span class="comment">//false </span></span><br><span class="line">        System.out.println(s2 == s7); <span class="comment">//false </span></span><br><span class="line"></span><br><span class="line">        String b1 = <span class="keyword">new</span> String(<span class="string">""</span>); </span><br><span class="line">        String b2 = <span class="string">""</span>; </span><br><span class="line">        String b3 = <span class="keyword">new</span> String(<span class="string">""</span>); </span><br><span class="line">        String b4 = <span class="string">""</span>.intern(); </span><br><span class="line">        String b5 = <span class="string">""</span> + <span class="string">""</span>; </span><br><span class="line">        String b6 = <span class="string">""</span>.concat(<span class="string">""</span>); </span><br><span class="line">        String b7 = <span class="string">"  "</span>.trim(); </span><br><span class="line">        String b8 = <span class="string">"  "</span>; </span><br><span class="line">        String b9 = <span class="string">"    "</span>.trim(); </span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"------------空串-----------"</span>); </span><br><span class="line">        System.out.println(b1 == b2);  <span class="comment">//false </span></span><br><span class="line">        System.out.println(b1 == b3);  <span class="comment">//false </span></span><br><span class="line">        System.out.println(b2 == b3);  <span class="comment">//false </span></span><br><span class="line">        System.out.println(b2 == b4);  <span class="comment">//true </span></span><br><span class="line">        System.out.println(b2 == b5);  <span class="comment">//true* </span></span><br><span class="line">        System.out.println(b2 == b6);  <span class="comment">//true* </span></span><br><span class="line">        System.out.println(b2 == b7);  <span class="comment">//false* </span></span><br><span class="line">        System.out.println(<span class="string">"-----a----"</span>); </span><br><span class="line">        System.out.println(b2.equals(b7));  <span class="comment">//true </span></span><br><span class="line">        System.out.println(b7 == b8);  <span class="comment">//false </span></span><br><span class="line">        System.out.println(b7 == b9);  <span class="comment">//false </span></span><br><span class="line">        System.out.println(b7.equals(b9)); <span class="comment">//true </span></span><br><span class="line">        System.out.println(b9 == <span class="keyword">null</span>);<span class="comment">//false </span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"b8.trim():"</span>); </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">byte</span> b : b8.getBytes()) &#123; </span><br><span class="line">            System.out.print(<span class="string">"&gt;&gt;&gt;"</span> + (<span class="keyword">int</span>) b + <span class="string">" "</span>); </span><br><span class="line">        &#125; </span><br><span class="line">        System.out.println(<span class="string">"\nb8.trim():"</span>); </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">byte</span> b : b8.trim().getBytes()) &#123; </span><br><span class="line">            System.out.print(<span class="string">"&gt;&gt;&gt;"</span> + (<span class="keyword">int</span>) b + <span class="string">" "</span>); </span><br><span class="line">        &#125; </span><br><span class="line">        System.out.println(<span class="string">"\nb9.trim():"</span>); </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">byte</span> b : b9.trim().getBytes()) &#123; </span><br><span class="line">            System.out.print(<span class="string">"&gt;&gt;&gt;"</span> + (<span class="keyword">int</span>) b + <span class="string">" "</span>); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>String类里面intern()<br>public String intern():返回字符串对象的规范化表示形式。<br>一个初始时为空的字符串池，它由类 String 私有地维护。<br>当调用 intern 方法时，如果池已经包含一个等于此 String 对象的字符串（该对象由 equals(Object) 方法确定），则返回池中的字符串。否则，将此 String 对象添加到池中，并且返回此 String 对象的引用。<br>它遵循对于任何两个字符串 s 和 t，当且仅当 s.equals(t) 为 true 时，s.intern() == t.intern() 才为 true。<br>所有字面值字符串和字符串赋值常量表达式都是内部的。<br>返回：<br>一个字符串，内容与此字符串相同，但它保证来自字符串池中。<br>举例：尽管在输出中调用intern方法并没有什么效果，但是实际上后台这个方法会做一系列的动作和操作。在调用”ab”.intern()方法的时候会返回”ab”，但是这个方法会首先检查字符串池中是否有”ab”这个字符串，如果<strong>存在则返回这个字符串的引用</strong>，否则就将这个字符串添加到字符串池中，然会返回这个字符串的引用。</p>
+</blockquote>
+<h2 id="String的常见用法"><a href="#String的常见用法" class="headerlink" title="String的常见用法"></a>String的常见用法</h2><h3 id="字符串重编码"><a href="#字符串重编码" class="headerlink" title="字符串重编码"></a>字符串重编码</h3><blockquote>
+<p>这个问题说来比较简单，转码就一行搞定，不信你看看，但究竟为什么要转码，是个很深奥的问题，看<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 字符串转码测试</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> leizhimin 2009-7-17 10:50:06</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestEncoding</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> UnsupportedEncodingException </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"转码前，输出Java系统属性如下："</span>);</span><br><span class="line">		System.out.println(<span class="string">"user.country:"</span> + System.getProperty(<span class="string">"user.country"</span>));</span><br><span class="line">		System.out.println(<span class="string">"user.language:"</span> + System.getProperty(<span class="string">"user.language"</span>));</span><br><span class="line">		System.out.println(<span class="string">"sun.jnu.encoding:"</span> + System.getProperty(<span class="string">"sun.jnu.encoding"</span>));</span><br><span class="line">		System.out.println(<span class="string">"file.encoding:"</span> + System.getProperty(<span class="string">"file.encoding"</span>));</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">"---------------"</span>);</span><br><span class="line">		String s = <span class="string">"熔岩博客"</span>;</span><br><span class="line">		String s1 = <span class="keyword">new</span> String(s.getBytes(), <span class="string">"UTF-8"</span>);</span><br><span class="line">		String s2 = <span class="keyword">new</span> String(s.getBytes(<span class="string">"UTF-8"</span>), <span class="string">"UTF-8"</span>);</span><br><span class="line">		String s3 = <span class="keyword">new</span> String(s.getBytes(<span class="string">"UTF-8"</span>));</span><br><span class="line">		String s4 = <span class="keyword">new</span> String(s.getBytes(<span class="string">"UTF-8"</span>), <span class="string">"GBK"</span>);</span><br><span class="line">		String s5 = <span class="keyword">new</span> String(s.getBytes(<span class="string">"GBK"</span>));</span><br><span class="line">		String s6 = <span class="keyword">new</span> String(s.getBytes(<span class="string">"GBK"</span>), <span class="string">"GBK"</span>);</span><br><span class="line">		System.out.println(s1);</span><br><span class="line">		System.out.println(s2);</span><br><span class="line">		System.out.println(s3);</span><br><span class="line">		System.out.println(s4);</span><br><span class="line">		System.out.println(s5);</span><br><span class="line">		System.out.println(s6);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>输出结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">转码前，输出Java系统属性如下：</span><br><span class="line">user.country:CN</span><br><span class="line">user.language:zh</span><br><span class="line">sun.jnu.encoding:GBK</span><br><span class="line">file.encoding:GBK</span><br><span class="line">---------------</span><br><span class="line">???????</span><br><span class="line">熔岩博客</span><br><span class="line">鐔斿博鍗氬</span><br><span class="line">鐔斿博鍗氬</span><br><span class="line">熔岩博客</span><br><span class="line">熔岩博客</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>得出一结论：<br>a、转一个码，又用该码来构建一个字符串，是绝对不会出现乱码的，—-你相当于没转。<br>b、转码与否，与字符串本身编码有关，字符串本身的编码与谁有关？—-文件编码，或者你的IDE设置的编码有关。<br>在此，我用的IDEA开发工具，默认是UTF-8编码，但操作系统使用的是GBK，但没有问题，我只要按照UTF-8来读取我的字符串就不会有乱码。但是文件已经是UTF-8了，你非要转为GBK，不乱才怪！那有什么办法呢？在Windows下，用记事本或者Editplus打开后另存为（并修改编码方式即可）。<br><img src="/img/200907171247801310703.png" alt><br>至于已经要从UFT-8转换为GBK，这就要靠内码转换工具了，是个比较复杂的问题，如果有谁想研究可以告诉我，一块研究研究。</p>
+</blockquote>
+<h3 id="字符比较"><a href="#字符比较" class="headerlink" title="字符比较"></a>字符比较</h3><p>不就是个匹配关系吗？String类的API有一些可以做比较，如果不行，可以寻求正则表达式来解决。</p>
+<h3 id="获取某个字符"><a href="#获取某个字符" class="headerlink" title="获取某个字符"></a>获取某个字符</h3><p>获取一个字符序列toCharArray() ，然后就随便玩去吧，中文就乱了。</p>
+<h3 id="字符串的截取"><a href="#字符串的截取" class="headerlink" title="字符串的截取"></a>字符串的截取</h3><p>substring()</p>
+<h3 id="字符串的替换与查找"><a href="#字符串的替换与查找" class="headerlink" title="字符串的替换与查找"></a>字符串的替换与查找</h3><p>参看<a href="http://lavasoft.blog.51cto.com/blog/62575/179324" target="_blank" rel="noopener">http://lavasoft.blog.51cto.com/blog/62575/179324</a></p>
+<h3 id="开始结束判断"><a href="#开始结束判断" class="headerlink" title="开始结束判断"></a>开始结束判断</h3><p>startsWith()/endWith()</p>
+<h3 id="字符串的排序比较"><a href="#字符串的排序比较" class="headerlink" title="字符串的排序比较"></a>字符串的排序比较</h3><p>compareTo(String anotherString) 按字典顺序比较两个字符串。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len1 = value.length;</span><br><span class="line">        <span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line">		<span class="comment">//获取到两个字符串的较短的长度</span></span><br><span class="line">        <span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line">        <span class="keyword">char</span> v1[] = value;</span><br><span class="line">        <span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line">            <span class="keyword">char</span> c1 = v1[k];</span><br><span class="line">            <span class="keyword">char</span> c2 = v2[k];</span><br><span class="line">			<span class="comment">//如果两个字符的Unicode不相同，则直接返回</span></span><br><span class="line">            <span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">                <span class="keyword">return</span> c1 - c2;</span><br><span class="line">            &#125;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 如果前面的都相等，则返回两个字符串长度的差值</span></span><br><span class="line">        <span class="keyword">return</span> len1 - len2;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>但一直在想着compareTo可以用于实际中什么应用呢？？我这里例举使用compareTo进行简单 字符串的排序。（例如使用compareTo 进行姓名的排序）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要进行排序的字符串  </span></span><br><span class="line">String[] array = <span class="keyword">new</span> String[] &#123; <span class="string">"lilei"</span>, <span class="string">"libai"</span>, <span class="string">"james"</span>, <span class="string">"poly"</span>,  </span><br><span class="line">                <span class="string">"wobfei"</span> &#125;;  </span><br><span class="line"><span class="comment">//使用简单的循环排序  </span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length - <span class="number">1</span>; i++) &#123;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; array.length; j++) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (array[i].compareTo(array[j]) &gt; <span class="number">0</span>) &#123;  </span><br><span class="line">            String temp = array[i];  </span><br><span class="line">            array[i] = array[j];  </span><br><span class="line">            array[j] = temp;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>使用上面针对String的排序以后，字符串的内容将会是：<br>james  libai  lilei  poly  wobfei</p>
+</blockquote>
+<p>compareToIgnoreCase(String str) 不考虑大小写，按字典顺序比较两个字符串。</p>
+<h3 id="字符串的equals-和hashCode"><a href="#字符串的equals-和hashCode" class="headerlink" title="字符串的equals()和hashCode()"></a>字符串的equals()和hashCode()</h3><p>注意：在比较一个字符串是否是空字符串的时候，使用””.equals(str);不要使用str.equals(“”);避免出现空指针异常<br>已经实现了好了，直接调用，不用重写</p>
+<h3 id="字符串的类型转化"><a href="#字符串的类型转化" class="headerlink" title="字符串的类型转化"></a>字符串的类型转化</h3><p>太多了，String.valueOf()系列很多。<br>类似的Long.parseLong(String s) </p>
+<h3 id="字符串的复制"><a href="#字符串的复制" class="headerlink" title="字符串的复制"></a>字符串的复制</h3><p>copyValueOf()<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">copyValueOf</span><span class="params">(<span class="keyword">char</span> data[], <span class="keyword">int</span> offset, <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String(data, offset, count);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">copyValueOf</span><span class="params">(<span class="keyword">char</span> data[])</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String(data);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="大小写转换"><a href="#大小写转换" class="headerlink" title="大小写转换"></a>大小写转换</h3><p>toLowerCase()<br>toUpperCase()</p>
+<h3 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h3><p><a href="http://lavasoft.blog.51cto.com/blog/62575/179324" target="_blank" rel="noopener">http://lavasoft.blog.51cto.com/blog/62575/179324</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/08/leetcode/Trapping-Rain-Water-II/" rel="next" title="Trapping Rain Water II">
+                <i class="fa fa-chevron-left"></i> Trapping Rain Water II
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/14/Java/Java创建对象的5种方式/" rel="prev" title="Java创建对象的5种方式">
+                Java创建对象的5种方式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+
+	       <a href="/">
+   			 <img class="site-author-image" itemprop="image" src="/images/20170511153115.jpg" alt>
+	       </a>
+              
+            
+              <p class="site-author-name" itemprop="name">挥斥方遒</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/HelloWorld0318/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从根本上认识java-lang-String类和String池"><span class="nav-number">1.</span> <span class="nav-text">从根本上认识java.lang.String类和String池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String对象的创建"><span class="nav-number">2.</span> <span class="nav-text">String对象的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#认识trim-、intern-和concat-、“-”-认识空格、空串、null"><span class="nav-number">3.</span> <span class="nav-text">认识trim()、intern()和concat()、“+”,认识空格、空串、null</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String的常见用法"><span class="nav-number">4.</span> <span class="nav-text">String的常见用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串重编码"><span class="nav-number">4.1.</span> <span class="nav-text">字符串重编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符比较"><span class="nav-number">4.2.</span> <span class="nav-text">字符比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取某个字符"><span class="nav-number">4.3.</span> <span class="nav-text">获取某个字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的截取"><span class="nav-number">4.4.</span> <span class="nav-text">字符串的截取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的替换与查找"><span class="nav-number">4.5.</span> <span class="nav-text">字符串的替换与查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始结束判断"><span class="nav-number">4.6.</span> <span class="nav-text">开始结束判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的排序比较"><span class="nav-number">4.7.</span> <span class="nav-text">字符串的排序比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的equals-和hashCode"><span class="nav-number">4.8.</span> <span class="nav-text">字符串的equals()和hashCode()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的类型转化"><span class="nav-number">4.9.</span> <span class="nav-text">字符串的类型转化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的复制"><span class="nav-number">4.10.</span> <span class="nav-text">字符串的复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大小写转换"><span class="nav-number">4.11.</span> <span class="nav-text">大小写转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则匹配"><span class="nav-number">4.12.</span> <span class="nav-text">正则匹配</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">挥斥方遒</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">43.7k</span>
+  
+</div>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+<div id="days"></div>
+<script>
+function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay=new Date("08/17/2017 00:00:00");//修改为自己的blog建站时间
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="本站已安全运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+    if (i<10)
+    {i="0" + i};
+    return i;
+}
+show_date_time();
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+  
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>

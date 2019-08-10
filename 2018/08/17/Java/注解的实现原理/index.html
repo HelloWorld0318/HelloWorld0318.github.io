@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="挥斥方遒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="1.什么是注解注解是JDK1.5的一个新特性，注解是插入你代码中的一种注释或者说是一种元数据（meta data），即一种描述数据的数据。所以，可以说注解就是源代码的元数据。这些注解信息可以在编译期使用预编译工具进行处理（pre-complier tools），也可以在运行期使用Java反射机制进行处理。注解，其实就是对类，方法，属性进行一种标示，一种注释（注意，这个注释不是为了让我们开发或维护人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全面解析Java注解">
+<meta property="og:url" content="http://yoursite.com/2018/08/17/Java/注解的实现原理/index.html">
+<meta property="og:site_name" content="挥斥方遒">
+<meta property="og:description" content="1.什么是注解注解是JDK1.5的一个新特性，注解是插入你代码中的一种注释或者说是一种元数据（meta data），即一种描述数据的数据。所以，可以说注解就是源代码的元数据。这些注解信息可以在编译期使用预编译工具进行处理（pre-complier tools），也可以在运行期使用Java反射机制进行处理。注解，其实就是对类，方法，属性进行一种标示，一种注释（注意，这个注释不是为了让我们开发或维护人">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/annotation0.jpg">
+<meta property="og:image" content="http://yoursite.com/img/annotation1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/annotation3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/annotation4.jpg">
+<meta property="og:image" content="http://yoursite.com/img/annotation5.jpg">
+<meta property="og:image" content="http://yoursite.com/img/annotation6.jpg">
+<meta property="og:image" content="http://yoursite.com/img/annotation7.png">
+<meta property="og:image" content="http://yoursite.com/img/annotation8.png">
+<meta property="og:image" content="http://yoursite.com/img/annotation9.png">
+<meta property="og:updated_time" content="2018-09-04T11:54:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="全面解析Java注解">
+<meta name="twitter:description" content="1.什么是注解注解是JDK1.5的一个新特性，注解是插入你代码中的一种注释或者说是一种元数据（meta data），即一种描述数据的数据。所以，可以说注解就是源代码的元数据。这些注解信息可以在编译期使用预编译工具进行处理（pre-complier tools），也可以在运行期使用Java反射机制进行处理。注解，其实就是对类，方法，属性进行一种标示，一种注释（注意，这个注释不是为了让我们开发或维护人">
+<meta name="twitter:image" content="http://yoursite.com/img/annotation0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/17/Java/注解的实现原理/">
+
+
+
+
+
+  <title>全面解析Java注解 | 挥斥方遒</title>
+  
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">挥斥方遒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">CODING MY AMBITION</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java/注解的实现原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="挥斥方遒">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/20170511153115.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="挥斥方遒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">全面解析Java注解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T23:19:19+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java语言学习/" itemprop="url" rel="index">
+                    <span itemprop="name">Java语言学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-什么是注解"><a href="#1-什么是注解" class="headerlink" title="1.什么是注解"></a>1.什么是注解</h3><p>注解是JDK1.5的一个新特性，注解是插入你代码中的一种注释或者说是一种元数据（meta data），即一种描述数据的数据。所以，可以说注解就是源代码的元数据。这些注解信息可以在编译期使用预编译工具进行处理（pre-complier tools），也可以在运行期使用Java反射机制进行处理。<br>注解，其实就是对类，方法，属性进行一种标示，一种注释（注意，这个注释不是为了让我们开发或维护人员阅读更方便，而是为给JVM看），通过这些标示，JVM可以完成这些标示对应的功能。</p>
+<h3 id="2-为什么要引入注解"><a href="#2-为什么要引入注解" class="headerlink" title="2.为什么要引入注解"></a>2.为什么要引入注解</h3><p>注解是JDK1.5引入的功能，但是为什么引入注解呢？在JDK1.5之前，Java还没有引入注解，这个时候如果我们要在Spring中声明一个Bean，我们只能通过xml配置的方式，如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.phicomm.UserService"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>但是有了注解以后，我们可以不必写一个xml配置文件，可以直接在UserService类上完成Bean的声明工作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于注解的开发方式。我们会发现它和代码结合的很紧密，所以注解比较适合做一些与代码相关度高的操作，例如将bean对应的服务暴露出去，<br>对于xml配置方式。我们会发现它将配置和代码隔离开来了所以XML配置更适合做一些全局的，与具体业务无关的操作。例如全局配置等。<br>基于注解开发还是XML的判断标准应该是：该配置与代码的相关度。如果代码与配置相关度高，那么使用注解配置，否则使用XML配置。</p>
+<h3 id="3-JDK提供的注解"><a href="#3-JDK提供的注解" class="headerlink" title="3.JDK提供的注解"></a>3.JDK提供的注解</h3><p>JDK1.5版本在java.lang.annotation提供了四种元注解，专门注解其他的注解。<br><strong>@Documented</strong>：表示使用该注解的元素应被JavaDoc或类似工具文档化，它应用于类型声明，类型声明的注解会影响客户端对注解元素的使用。如果一个类型声明添加了Documented注解，那么它的注解会成为被注解元素的公共API的一部分。<br><strong>@Retention</strong>：定义该注解的生命周期，它接收RetentionPolicy参数。<br>RetentionPolicy.SOURCE：在编译阶段丢弃。这些注解在编译结束之后就不再有任何意义，所以它们不会写入字节码。@Override，@SuppressWarning都属于这类注解。<br>RetentionPolicy.CLASS：在类加载的时候丢弃。在字节码文件的处理中有用。注释默认使用这种方式。<br>RetentionPolicy.RUNTIME：始终不会丢弃，运行期也保留该注解，因此可以使用反射机制读取该注解的信息。我们自定义的注解通常使用这种方式。<br><strong>@Target</strong>：表示该注解用于什么地方。如果<strong>不明确指出，该注解可以放在任何地方</strong>。以下是一些可以用的参数。需要说明的是，属性的注解是兼容的，如果你想给7个属性都添加注解，仅仅排除一个属性，那么你需要在定义target包含所有的属性。<br>ElementType.TYPE:用于描述类、接口或enum声明<br>ElementType.FIELD:用于描述实例变量<br>ElementType.METHOD<br>ElementType.PARAMETER<br>ElementType.CONSTRUCTOR<br>ElementType.LOCAL_VARIABLE<br>ElementType.ANNOTATION_TYPE 另一个注释<br>ElementType.PACKAGE 用于记录java文件的package信息<br><strong>@Inherited</strong>：表示一个注解类型会被自动继承，如果用户在类声明的时候查询注解类型，同时类声明中也没有这个类型的注解，那么注解类型会自动查询该类的父类，这个过程将会不停地重复，直到该类型的注解被找到为止，或是到达类结构的顶层（Object）。<br>JDK1.8加入了一种新的注解。<br><strong>@Repeatable</strong>：表示注解的值可以取多个。</p>
+<p>JDK提供了五种内置注解：<br><strong>@Override</strong>：当我们想要覆盖父类的一个方法时，需要使用该注解告知编译器我们正在覆盖一个方法。这样的话，当父类的方法被删除或修改了，编译器会提示错误信息。<br><strong>@Deprecated</strong>：当我们想要让编译器知道一个方法已经被弃用（deprecate）时，应该使用这个注解。Java推荐在JavaDoc中提供信息，告知用户为什么这个方法被弃用，以及替代方法是什么。<br><strong>@SuppressWarning</strong>：这个注解仅仅告知编译器，忽略它们产生了特殊警告。比如，在Java泛型了使用原始类型。它的保持性策略是SOURCE，在编译器中将被丢弃。<br><strong>@SafeVarargs</strong>：参数安全类型注解。它的目的是提醒开发者不要用参数做一些不安全的操作，它的存在会阻止编译器产生unchecked这样的警告。在JDK1.7中引入。<br><strong>@FunctionalInterfac</strong>e：函数式接口注解，这个是JDK1.8引入的。</p>
+<h3 id="4-创建自定义的注解"><a href="#4-创建自定义的注解" class="headerlink" title="4.创建自定义的注解"></a>4.创建自定义的注解</h3><p>创建自定义注解需要注意如下：<br>（1）.注解方法不能有参数<br>（2）.注解方法的返回类型局限于原始类型，字符串，枚举，注解，或以上类型构成的数组<br>（3）.注解方法可以包含返回值<br>（4）.注解可以包含与其绑定的元注解，元注解为注解提供信息<br>（5）.如果只有一个参数成员，最好把参数名称设为“value”,后加小括号。<br>创建我们自定义的注解如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> HelloAnnotation &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> "Hai"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用我们自己创建的注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@HelloAnnotation</span>(say = <span class="string">"hello world"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestMain</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        HelloAnnotation helloAnnotation = TestMain.class.getAnnotation(HelloAnnotation.class);</span><br><span class="line">        System.out.println(helloAnnotation.value());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出的运行结果如下：<br><img src="/img/annotation0.jpg" alt></p>
+<h3 id="5-注解的原理"><a href="#5-注解的原理" class="headerlink" title="5.注解的原理"></a>5.注解的原理</h3><h4 id="5-1-注解获得的具体对象是什么"><a href="#5-1-注解获得的具体对象是什么" class="headerlink" title="5.1 注解获得的具体对象是什么"></a>5.1 注解获得的具体对象是什么</h4><p>我们在TestMain类的main方法加入如下的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@HelloAnnotation</span>(value = <span class="string">"hello world"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestMain</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"><span class="comment">//	运行时生成的动态代理对象是可以导出到文件的</span></span><br><span class="line">        System.setProperty(<span class="string">"sun.misc.ProxyGenerator.saveGeneratedFiles"</span>, <span class="string">"true"</span>);</span><br><span class="line">        HelloAnnotation helloAnnotation = TestMain.class.getAnnotation(HelloAnnotation.class);</span><br><span class="line">        System.out.println(helloAnnotation.getClass().getName());</span><br><span class="line">        System.out.println(helloAnnotation.value());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出的结果如下：<br><img src="/img/annotation1.jpg" alt><br>而生成的动态代理类如下(省略到部分代码)：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> $<span class="title">Proxy1</span> <span class="keyword">extends</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">HelloAnnotation</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m1;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m2;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m4;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m0;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m3;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> $Proxy1(InvocationHandler var1) <span class="keyword">throws</span>  &#123;</span><br><span class="line">        <span class="keyword">super</span>(var1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	这里生成的代理类重写了我们在注解中定义的方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">value</span><span class="params">()</span> <span class="keyword">throws</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (String)<span class="keyword">super</span>.h.invoke(<span class="keyword">this</span>, m3, (Object[])<span class="keyword">null</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RuntimeException | Error var2) &#123;</span><br><span class="line">            <span class="keyword">throw</span> var2;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable var3) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UndeclaredThrowableException(var3);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...   </span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ...</span><br><span class="line">            m3 = Class.forName(<span class="string">"com.phicomm.annotation.HelloAnnotation"</span>).getMethod(<span class="string">"value"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException var2) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchMethodError(var2.getMessage());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException var3) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoClassDefFoundError(var3.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>根据“public final class $Proxy1 extends Proxy implements HelloAnnotation”这段代码，可以看出其实HelloAnnotation是一个接口。我们反编译HelloAnntation.class文件，得到如下的结果。<br><img src="/img/annotation3.jpg" alt><br>Java里面的Annotation的源代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Annotation</span> </span>&#123;</span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</span><br><span class="line">   </span><br><span class="line">    <span class="function">String <span class="title">toString</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    Class&lt;? extends Annotation&gt; annotationType();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接口Annotation被我们自定义的注解HelloAnnotation继承，而HelloAnnotation本质是一个接口，这个接口被代理类$Proxy1.java实现，而HelloAnnotation里面的方法都在$Proxy里面重写。这是JDK动态代理机制实现的。我们在TestMain获得的HelloAnnotation对象，就是由这个代理类生成的。</p>
+<h4 id="5-2动态代理类-Proxy1是如何处理helloAnnotation-value-方法的调用的"><a href="#5-2动态代理类-Proxy1是如何处理helloAnnotation-value-方法的调用的" class="headerlink" title="5.2动态代理类$Proxy1是如何处理helloAnnotation.value()方法的调用的"></a>5.2动态代理类$Proxy1是如何处理helloAnnotation.value()方法的调用的</h4><p>熟悉JDK的动态代理一定会涉及到InvocationHandler，而annotation.value()方法的调用一定是通过绑定在InvocationHandler实例的invoke方法上，通过method.invoke()这种形式调用的。我们下面讲解这部分内容。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> $<span class="title">Proxy1</span> <span class="keyword">extends</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">HelloAnnotation</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">value</span><span class="params">()</span> <span class="keyword">throws</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (String)<span class="keyword">super</span>.h.invoke(<span class="keyword">this</span>, m3, (Object[])<span class="keyword">null</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RuntimeException | Error var2) &#123;</span><br><span class="line">            <span class="keyword">throw</span> var2;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable var3) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UndeclaredThrowableException(var3);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由多态的知识我们知道，helloAnnotation.value()的调用最终会转移到代理类$Proxy重写的value()方法上面，最终执行的代码是(String)super.h.invoke(this, m3, (Object[])null);那这里的InvocationHandler的实例是什么？<br>我们再Proxy的构造方法上面加断点，可以看出这里的InvocationHandler实例是AnnocationInvocationHandler的实例<br><img src="/img/annotation4.jpg" alt><br>而我们的helloAnnotation.value()方法是如何执行的？我们再AnnocationInvocationHandler.java的invoke()方法上加断点单步调试。<br><img src="/img/annotation5.jpg" alt><br>从上图可以看到，value()方法的返回值是从LinkedHashMap里面获得的。这个map结构的key值是方法名，value值是方法的返回值。我们一步步看这个LinkedHashMap结构是如何构造的。<br><img src="/img/annotation6.jpg" alt><br>这个LinkedHashMap是在AnnotationParser类的parseAnnotation2方法中构建的。我们单步调试进入parseNumberValue()方法内部<br><img src="/img/annotation7.png" alt><br><img src="/img/annotation8.png" alt><br><img src="/img/annotation9.png" alt><br>反编译TestMain.class的内容，我们获得了如下内容<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line">Classfile /D:/reflectStudy/out/production/reflectStudy/com/phicomm/annotation/TestMain.class</span><br><span class="line">  Last modified 2018-8-18; size 1125 bytes</span><br><span class="line">  MD5 checksum b6f5e94bc326b15093fbf4b43283ff86</span><br><span class="line">  Compiled from "TestMain.java"</span><br><span class="line">public class com.phicomm.annotation.TestMain</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_SUPER</span><br><span class="line">Constant pool:</span><br><span class="line"><span class="meta">   #</span>1 = Methodref          #13.#32        // java/lang/Object."&lt;init&gt;":()V</span><br><span class="line"><span class="meta">   #</span>2 = String             #33            // sun.misc.ProxyGenerator.saveGeneratedFiles</span><br><span class="line"><span class="meta">   #</span>3 = String             #34            // true</span><br><span class="line"><span class="meta">   #</span>4 = Methodref          #35.#36        // java/lang/System.setProperty:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span><br><span class="line"><span class="meta">   #</span>5 = Class              #37            // com/phicomm/annotation/TestMain</span><br><span class="line"><span class="meta">   #</span>6 = Class              #38            // com/phicomm/annotation/HelloAnnotation</span><br><span class="line"><span class="meta">   #</span>7 = Methodref          #39.#40        // java/lang/Class.getAnnotation:(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;</span><br><span class="line"><span class="meta">   #</span>8 = Fieldref           #35.#41        // java/lang/System.out:Ljava/io/PrintStream;</span><br><span class="line"><span class="meta">   #</span>9 = Methodref          #13.#42        // java/lang/Object.getClass:()Ljava/lang/Class;</span><br><span class="line"><span class="meta">  #</span>10 = Methodref          #39.#43        // java/lang/Class.getName:()Ljava/lang/String;</span><br><span class="line"><span class="meta">  #</span>11 = Methodref          #44.#45        // java/io/PrintStream.println:(Ljava/lang/String;)V</span><br><span class="line"><span class="meta">  #</span>12 = InterfaceMethodref #6.#46         // com/phicomm/annotation/HelloAnnotation.value:()Ljava/lang/String;</span><br><span class="line"><span class="meta">  #</span>13 = Class              #47            // java/lang/Object</span><br><span class="line"><span class="meta">  #</span>14 = Utf8               &lt;init&gt;</span><br><span class="line"><span class="meta">  #</span>15 = Utf8               ()V</span><br><span class="line"><span class="meta">  #</span>16 = Utf8               Code</span><br><span class="line"><span class="meta">  #</span>17 = Utf8               LineNumberTable</span><br><span class="line"><span class="meta">  #</span>18 = Utf8               LocalVariableTable</span><br><span class="line"><span class="meta">  #</span>19 = Utf8               this</span><br><span class="line"><span class="meta">  #</span>20 = Utf8               Lcom/phicomm/annotation/TestMain;</span><br><span class="line"><span class="meta">  #</span>21 = Utf8               main</span><br><span class="line"><span class="meta">  #</span>22 = Utf8               ([Ljava/lang/String;)V</span><br><span class="line"><span class="meta">  #</span>23 = Utf8               args</span><br><span class="line"><span class="meta">  #</span>24 = Utf8               [Ljava/lang/String;</span><br><span class="line"><span class="meta">  #</span>25 = Utf8               helloAnnotation</span><br><span class="line"><span class="meta">  #</span>26 = Utf8               Lcom/phicomm/annotation/HelloAnnotation;</span><br><span class="line"><span class="meta">  #</span>27 = Utf8               SourceFile</span><br><span class="line"><span class="meta">  #</span>28 = Utf8               TestMain.java</span><br><span class="line"><span class="meta">  #</span>29 = Utf8               RuntimeVisibleAnnotations</span><br><span class="line"><span class="meta">  #</span>30 = Utf8               value</span><br><span class="line"><span class="meta">  #</span>31 = Utf8               hello world</span><br><span class="line"><span class="meta">  #</span>32 = NameAndType        #14:#15        // "&lt;init&gt;":()V</span><br><span class="line"><span class="meta">  #</span>33 = Utf8               sun.misc.ProxyGenerator.saveGeneratedFiles</span><br><span class="line"><span class="meta">  #</span>34 = Utf8               true</span><br><span class="line"><span class="meta">  #</span>35 = Class              #48            // java/lang/System</span><br><span class="line"><span class="meta">  #</span>36 = NameAndType        #49:#50        // setProperty:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span><br><span class="line"><span class="meta">  #</span>37 = Utf8               com/phicomm/annotation/TestMain</span><br><span class="line"><span class="meta">  #</span>38 = Utf8               com/phicomm/annotation/HelloAnnotation</span><br><span class="line"><span class="meta">  #</span>39 = Class              #51            // java/lang/Class</span><br><span class="line"><span class="meta">  #</span>40 = NameAndType        #52:#53        // getAnnotation:(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;</span><br><span class="line"><span class="meta">  #</span>41 = NameAndType        #54:#55        // out:Ljava/io/PrintStream;</span><br><span class="line"><span class="meta">  #</span>42 = NameAndType        #56:#57        // getClass:()Ljava/lang/Class;</span><br><span class="line"><span class="meta">  #</span>43 = NameAndType        #58:#59        // getName:()Ljava/lang/String;</span><br><span class="line"><span class="meta">  #</span>44 = Class              #60            // java/io/PrintStream</span><br><span class="line"><span class="meta">  #</span>45 = NameAndType        #61:#62        // println:(Ljava/lang/String;)V</span><br><span class="line"><span class="meta">  #</span>46 = NameAndType        #30:#59        // value:()Ljava/lang/String;</span><br><span class="line"><span class="meta">  #</span>47 = Utf8               java/lang/Object</span><br><span class="line"><span class="meta">  #</span>48 = Utf8               java/lang/System</span><br><span class="line"><span class="meta">  #</span>49 = Utf8               setProperty</span><br><span class="line"><span class="meta">  #</span>50 = Utf8               (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span><br><span class="line"><span class="meta">  #</span>51 = Utf8               java/lang/Class</span><br><span class="line"><span class="meta">  #</span>52 = Utf8               getAnnotation</span><br><span class="line"><span class="meta">  #</span>53 = Utf8               (Ljava/lang/Class;)Ljava/lang/annotation/Annotation;</span><br><span class="line"><span class="meta">  #</span>54 = Utf8               out</span><br><span class="line"><span class="meta">  #</span>55 = Utf8               Ljava/io/PrintStream;</span><br><span class="line"><span class="meta">  #</span>56 = Utf8               getClass</span><br><span class="line"><span class="meta">  #</span>57 = Utf8               ()Ljava/lang/Class;</span><br><span class="line"><span class="meta">  #</span>58 = Utf8               getName</span><br><span class="line"><span class="meta">  #</span>59 = Utf8               ()Ljava/lang/String;</span><br><span class="line"><span class="meta">  #</span>60 = Utf8               java/io/PrintStream</span><br><span class="line"><span class="meta">  #</span>61 = Utf8               println</span><br><span class="line"><span class="meta">  #</span>62 = Utf8               (Ljava/lang/String;)V</span><br><span class="line">&#123;</span><br><span class="line">  public com.phicomm.annotation.TestMain();</span><br><span class="line">    descriptor: ()V</span><br><span class="line">    flags: ACC_PUBLIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=1, locals=1, args_size=1</span><br><span class="line">         0: aload_0</span><br><span class="line">         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V</span><br><span class="line">         4: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 6: 0</span><br><span class="line">      LocalVariableTable:</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">            0       5     0  this   Lcom/phicomm/annotation/TestMain;</span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]);</span><br><span class="line">    descriptor: ([Ljava/lang/String;)V</span><br><span class="line">    flags: ACC_PUBLIC, ACC_STATIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=2, locals=2, args_size=1</span><br><span class="line">         0: ldc           #2                  // String sun.misc.ProxyGenerator.saveGeneratedFiles</span><br><span class="line">         2: ldc           #3                  // String true</span><br><span class="line">         4: invokestatic  #4                  // Method java/lang/System.setProperty:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span><br><span class="line">         7: pop</span><br><span class="line">         8: ldc           #5                  // class com/phicomm/annotation/TestMain</span><br><span class="line">        10: ldc           #6                  // class com/phicomm/annotation/HelloAnnotation</span><br><span class="line">        12: invokevirtual #7                  // Method java/lang/Class.getAnnotation:(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;</span><br><span class="line">        15: checkcast     #6                  // class com/phicomm/annotation/HelloAnnotation</span><br><span class="line">        18: astore_1</span><br><span class="line">        19: getstatic     #8                  // Field java/lang/System.out:Ljava/io/PrintStream;</span><br><span class="line">        22: aload_1</span><br><span class="line">        23: invokevirtual #9                  // Method java/lang/Object.getClass:()Ljava/lang/Class;</span><br><span class="line">        26: invokevirtual #10                 // Method java/lang/Class.getName:()Ljava/lang/String;</span><br><span class="line">        29: invokevirtual #11                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span><br><span class="line">        32: getstatic     #8                  // Field java/lang/System.out:Ljava/io/PrintStream;</span><br><span class="line">        35: aload_1</span><br><span class="line">        36: invokeinterface #12,  1           // InterfaceMethod com/phicomm/annotation/HelloAnnotation.value:()Ljava/lang/String;</span><br><span class="line">        41: invokevirtual #11                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span><br><span class="line">        44: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 8: 0</span><br><span class="line">        line 9: 8</span><br><span class="line">        line 10: 19</span><br><span class="line">        line 11: 32</span><br><span class="line">        line 12: 44</span><br><span class="line">      LocalVariableTable:</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">            0      45     0  args   [Ljava/lang/String;</span><br><span class="line">           19      26     1 helloAnnotation   Lcom/phicomm/annotation/HelloAnnotation;</span><br><span class="line">&#125;</span><br><span class="line">SourceFile: "TestMain.java"</span><br><span class="line">RuntimeVisibleAnnotations:</span><br><span class="line">  0: #26(#30=s#31)</span><br></pre></td></tr></table></figure></p>
+<p>从上面可以看到如下的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#30 = Utf8               value</span><br><span class="line">#31 = Utf8               hello world</span><br></pre></td></tr></table></figure></p>
+<p>可以看到#31与var3的31对应（也就是常量池的索引），对应的值解释hello world。这就是value()方法的调用细节。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>注解本质上是一个继承了Annotation的特殊接口，其具体实现类是Java运行时生成的动态代理类。通过代理对象调用自定义注解（接口）的方法，会最终调用AnnotationInvocationHandler的invoke()方法。该方法会从memerValues这里Map中索引出对应的值（这个map结构中自定义注解中的方法名作为key值，value值是方法的返回值）。而memberValues的来源是Java常量池。而给类添加的注解最终体现在类的字节码文件上面。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/16/designpattern/代理模式/" rel="next" title="代理模式">
+                <i class="fa fa-chevron-left"></i> 代理模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/17/designpattern/模板方法模式/" rel="prev" title="模板方法模式模式">
+                模板方法模式模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+
+	       <a href="/">
+   			 <img class="site-author-image" itemprop="image" src="/images/20170511153115.jpg" alt>
+	       </a>
+              
+            
+              <p class="site-author-name" itemprop="name">挥斥方遒</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/HelloWorld0318/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是注解"><span class="nav-number">1.</span> <span class="nav-text">1.什么是注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-为什么要引入注解"><span class="nav-number">2.</span> <span class="nav-text">2.为什么要引入注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-JDK提供的注解"><span class="nav-number">3.</span> <span class="nav-text">3.JDK提供的注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-创建自定义的注解"><span class="nav-number">4.</span> <span class="nav-text">4.创建自定义的注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-注解的原理"><span class="nav-number">5.</span> <span class="nav-text">5.注解的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-注解获得的具体对象是什么"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 注解获得的具体对象是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2动态代理类-Proxy1是如何处理helloAnnotation-value-方法的调用的"><span class="nav-number">5.2.</span> <span class="nav-text">5.2动态代理类$Proxy1是如何处理helloAnnotation.value()方法的调用的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">挥斥方遒</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">43.7k</span>
+  
+</div>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+<div id="days"></div>
+<script>
+function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay=new Date("08/17/2017 00:00:00");//修改为自己的blog建站时间
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="本站已安全运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+    if (i<10)
+    {i="0" + i};
+    return i;
+}
+show_date_time();
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+  
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
