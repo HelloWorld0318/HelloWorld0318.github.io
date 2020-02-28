@@ -284,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/23/Binary-Tree-Maximum-Node/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/16/designpattern/代理模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="挥斥方遒">
@@ -303,7 +303,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/23/Binary-Tree-Maximum-Node/" itemprop="url">Binary Tree Maximum Node</a></h1>
+                <a class="post-title-link" href="/2018/08/16/designpattern/代理模式/" itemprop="url">代理模式</a></h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T23:02:50+08:00">
-                2017-09-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-16T23:19:19+08:00">
+                2018-08-16
               </time>
             
 
@@ -338,8 +338,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/lintcode解题报告/" itemprop="url" rel="index">
-                    <span itemprop="name">lintcode解题报告</span>
+                  <a href="/categories/JAVA设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA设计模式</span>
                   </a>
                 </span>
 
@@ -369,7 +369,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  520
+                  2.2k
                 </span>
               
 
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  9
                 </span>
               
             </div>
@@ -408,20 +408,11 @@
       
         
           
-          
-Description:Find the maximum node in a binary tree, return the node.Example:Given a bianry bree:12345     1   /   \ -5     2 / \   /  \0   3 -4  -5
-
-
-return the node with value 3.
-
-
-最近在找工作的工程当中，有非常一个重要的考核就是手写代码。如果写的代码是递归式的代码，面试官可能还要求将递归式的代码改成非递归的代码。就以这道题为例：
-
-这道题的递归解法如下：递归求解左子树的最大值节点maxLeftNode，递归求解
+          代理模式为其他对象提供一种代理以控制对这个对象的访问。（Provide a surrogate（代理） for another object to Control access to it[GOF]）GOF所设计的代理模式结构图如下所示：Subject接口：定义了RealSubject和Proxy的共用接口，这样在任何使用RealSubject的地方都可以使用Proxy。RealSubject：定义Proxy可以代表的实体。Proxy：保存一个引用可以访问RealSubject实体。通常和RealSubject一样也实现了Subject接口，它控制着对Subject实体的访问，并能负责创建和销
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/23/Binary-Tree-Maximum-Node/#more" rel="contents">
+            <a class="btn" href="/2018/08/16/designpattern/代理模式/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -472,7 +463,7 @@ return the node with value 3.
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/Java/Java内存泄漏/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/03/leetcode/99.Recover Binary Search Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="挥斥方遒">
@@ -491,7 +482,7 @@ return the node with value 3.
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/11/Java/Java内存泄漏/" itemprop="url">Java内存泄漏</a></h1>
+                <a class="post-title-link" href="/2018/03/03/leetcode/99.Recover Binary Search Tree/" itemprop="url">Recover Binary Search Tree</a></h1>
         
 
         <div class="post-meta">
@@ -503,8 +494,8 @@ return the node with value 3.
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T10:14:34+08:00">
-                2017-09-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-03T22:45:10+08:00">
+                2018-03-03
               </time>
             
 
@@ -526,8 +517,8 @@ return the node with value 3.
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java语言学习/" itemprop="url" rel="index">
-                    <span itemprop="name">Java语言学习</span>
+                  <a href="/categories/leetcode解题报告/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode解题报告</span>
                   </a>
                 </span>
 
@@ -557,7 +548,7 @@ return the node with value 3.
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  957
+                  874
                 </span>
               
 
@@ -596,11 +587,13 @@ return the node with value 3.
       
         
           
-          所谓内存泄漏就是指一个不再被程序使用的对象或变量一直占据在内存中。java中有垃圾回收机制，它可以保一个对象不再被引用的时候，即对象变成孤儿的时候，对象将自动被垃圾回收器从内存中清除掉。由于java使用有向图的方式进行垃圾回收管理，可以消除循环引用的问题，例如有两个对象，相互引用，只要他们和根进程不可达的，那么GC也是可以回收它们的。例如下面的代码所示：1234567891011121314151617181920public class ReferenceCountGc &#123;	public Object instance = null;		private static final i
+          题目描述Recover Binary Search Tree(难度级别：Hard)
+
+Description:Two elements of a binary search tree (BST) are swapped by mistake.Recover the tree without changing its structure.Example:Example 1:Example 2:Follow up:A solution using O(n) space is pretty straight forward.Could you devise a constant space solu
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/11/Java/Java内存泄漏/#more" rel="contents">
+            <a class="btn" href="/2018/03/03/leetcode/99.Recover Binary Search Tree/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -651,7 +644,7 @@ return the node with value 3.
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/08/Java/实现一个线程死锁的程序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/09/Java/Java中switch具体实现细节/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="挥斥方遒">
@@ -670,7 +663,7 @@ return the node with value 3.
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/08/Java/实现一个线程死锁的程序/" itemprop="url">实现一个线程死锁的程序</a></h1>
+                <a class="post-title-link" href="/2017/12/09/Java/Java中switch具体实现细节/" itemprop="url">Java中switch具体实现细节</a></h1>
         
 
         <div class="post-meta">
@@ -682,8 +675,8 @@ return the node with value 3.
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-08T10:43:49+08:00">
-                2017-09-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-09T11:17:38+08:00">
+                2017-12-09
               </time>
             
 
@@ -736,7 +729,7 @@ return the node with value 3.
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  239
+                  1.4k
                 </span>
               
 
@@ -752,7 +745,7 @@ return the node with value 3.
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  6
                 </span>
               
             </div>
@@ -775,12 +768,12 @@ return the node with value 3.
       
         
           
-          死锁的定义《现代操作系统》那本书中对死锁的定义如下：如果一个进程集合中的每个进程都在等待只能该进程集合中的其他进程才能引发的事件，那么，该进程集合就是死锁的。
-死锁的示例代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647public class MyLock &#123;	// 创建两把锁对象	public static final Object objA = new Object();	public static final Object objB = new Obje
+          switch case语句在很多编程语言中的功能都是等于条件判断，Java中为多路分支选择流程专门提供了switch语法，switch语句根据多个表达式的值，选择运行多个操作中的一个。当需要对选项进行等值判断时，使用switch语句更加简洁明了。switch的case语句可以处理int，short，byte，char类型的值。在JDK5以后可以是枚举类型，JDK7以后可以是String类型。但是，这里有个疑问，JDK5和JDK7以后，switch的语法为何可以使用非整形的类型。这篇文章主要揭开Java中当switch语句中的表达式为String和枚举的时候是如何处理的。
+Java中的switc
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/08/Java/实现一个线程死锁的程序/#more" rel="contents">
+            <a class="btn" href="/2017/12/09/Java/Java中switch具体实现细节/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -831,7 +824,7 @@ return the node with value 3.
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/07/输入一个url经历了什么/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/08/Java/java enum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="挥斥方遒">
@@ -850,7 +843,7 @@ return the node with value 3.
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/07/输入一个url经历了什么/" itemprop="url">输入一个url经历了什么</a></h1>
+                <a class="post-title-link" href="/2017/12/08/Java/java enum/" itemprop="url">全面解析Java枚举</a></h1>
         
 
         <div class="post-meta">
@@ -862,8 +855,8 @@ return the node with value 3.
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T21:40:48+08:00">
-                2017-09-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T11:17:38+08:00">
+                2017-12-08
               </time>
             
 
@@ -887,6 +880,187 @@ return the node with value 3.
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Java语言学习/" itemprop="url" rel="index">
                     <span itemprop="name">Java语言学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1.什么是枚举枚举类型是Java5中新增特性的一部分，它是一种特殊的数据类型。
+
+1.在某些情况下，一个类的对象是有限且固定的，如季节类，它只有春夏秋冬4个对象。这种实例有限且固定的类，在Java中被称为枚举类。2.在Java中，使用enum关键字来使用枚举类。3.枚举类是一种特殊的类，它和普通的类一样，有自己的成员变量，成员方法，构造方法（构造方法只能使用private访问修饰符，所以无法从外部调用构造方法，构造方法只在构造枚举值时被调用）。4.使用enum定义枚举类默认继承了java.lang.Enum类，并实现了java.lang.Seriablizable和java.lang.Comp
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/08/Java/java enum/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/05/machineLearning/KNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="挥斥方遒">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/20170511153115.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="挥斥方遒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/05/machineLearning/KNN/" itemprop="url">KNN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-05T20:43:43+08:00">
+                2017-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -959,7 +1133,7 @@ return the node with value 3.
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/07/输入一个url经历了什么/#more" rel="contents">
+            <a class="btn" href="/2017/12/05/machineLearning/KNN/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1010,7 +1184,7 @@ return the node with value 3.
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/01/Count-of-Smaller-Number-before-itself/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/Java/Object类概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="挥斥方遒">
@@ -1029,7 +1203,7 @@ return the node with value 3.
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/01/Count-of-Smaller-Number-before-itself/" itemprop="url">Count of Smaller Number before itself</a></h1>
+                <a class="post-title-link" href="/2017/11/16/Java/Object类概述/" itemprop="url">Object类概述</a></h1>
         
 
         <div class="post-meta">
@@ -1041,546 +1215,8 @@ return the node with value 3.
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T10:56:33+08:00">
-                2017-09-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/lintcode解题报告/" itemprop="url" rel="index">
-                    <span itemprop="name">lintcode解题报告</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  0
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/01/Count-of-Smaller-Number-before-itself/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/01/B-B-B-树的定义，特性，联系与区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="挥斥方遒">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/20170511153115.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="挥斥方遒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/01/B-B-B-树的定义，特性，联系与区别/" itemprop="url">B-树,B+树的定义,特性,联系与区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T10:51:29+08:00">
-                2017-09-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  3
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          B树B+树
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/01/B-B-B-树的定义，特性，联系与区别/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/31/MySQL连接查询/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="挥斥方遒">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/20170511153115.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="挥斥方遒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/31/MySQL连接查询/" itemprop="url">实例讲解MySQL的连接查询</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-31T18:32:55+08:00">
-                2017-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  34
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          连接查询的概念
-内连接查询外链接查询左外连接查询右外连接查询全连接查询
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/31/MySQL连接查询/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/31/Java/泛型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="挥斥方遒">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/20170511153115.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="挥斥方遒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/31/Java/泛型/" itemprop="url">泛型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-31T16:36:33+08:00">
-                2017-08-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T09:35:40+08:00">
+                2017-11-16
               </time>
             
 
@@ -1633,7 +1269,7 @@ return the node with value 3.
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  581
+                  1.9k
                 </span>
               
 
@@ -1649,7 +1285,7 @@ return the node with value 3.
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  7
                 </span>
               
             </div>
@@ -1672,14 +1308,18 @@ return the node with value 3.
       
         
           
-          什么是泛型
-泛型，即“参数化类型” 。创建集合时就指定集合元素的类型，该集合只能保存其指定类型的元素，避免使用强制类型转换。
+          什么是Object类
+java.lang.Object类Object是类层次结构的根类。每个类都使用Object作为超类。它位于java.lang包中，java.lang包包含着Java最基础和核心的类，在编译时会自动导入。所有对象（包括数组）都实现这个类的方法。在不明确给出超类的情况下，Java会自动把Object作为要定义类的超类。
 
-为什么需要泛型泛型实战从Collections的copy()方法中学习泛型123456789101112131415161718192021222324252627282930313233343536 /** * Copies all of the elements from one list into another.  After the * operation, the index of each copied element in the destinatio
+Object类方法有哪些
+Object类没有定义属性，一个有13个方法。
+
+类构造器public Object()
+大部分情况下，Java中通过形如new A(args..)形式创建一个属于该类型的对象。其中A即是类名，A(args..)即此类定义中相对应的
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/31/Java/泛型/#more" rel="contents">
+            <a class="btn" href="/2017/11/16/Java/Object类概述/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1730,7 +1370,7 @@ return the node with value 3.
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/31/Java/KMP字符串匹配算法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/Java/Java中的内部类/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="挥斥方遒">
@@ -1749,7 +1389,7 @@ return the node with value 3.
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/31/Java/KMP字符串匹配算法/" itemprop="url">Implement strStr()</a></h1>
+                <a class="post-title-link" href="/2017/11/09/Java/Java中的内部类/" itemprop="url">Java中的内部类总结</a></h1>
         
 
         <div class="post-meta">
@@ -1761,8 +1401,374 @@ return the node with value 3.
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-31T16:18:04+08:00">
-                2017-08-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T19:46:08+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java语言学习/" itemprop="url" rel="index">
+                    <span itemprop="name">Java语言学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          内部类定义
+内部类：可以将一个类的定义放在另一个类的定义内部，这个类就是内部类。为什么要使用内部类？在《Think in java》中有这样一句话：使用内部类最吸引人的原因是：每个内部类都能独立地继承一个（接口的）实现，所以无论外围类是否已经继承了某个（接口的）实现，对于内部类没有影响。其实使用内部类最大的优点就在于它能够非常好的解决多重继承的问题，但是如果我们不需要解决多重继承问题，那么我们自然可以使用其他的编码方式，但是使用内部类还能够为我们带来如下特征（摘自《Think in Java》）1.内部类可以有多个实例，每个实例都有自己的状态信息，并且与其他外围对象的信息相互独立。2.在单个外
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/09/Java/Java中的内部类/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/Java/Java中的代码块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="挥斥方遒">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/20170511153115.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="挥斥方遒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/09/Java/Java中的代码块/" itemprop="url">Java中的代码块</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T19:46:08+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java语言学习/" itemprop="url" rel="index">
+                    <span itemprop="name">Java语言学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+代码块：在Java中，使用{}括起来的代码被称为代码块，根据其位置和声明的不同，可以分为局部代码块，构造代码块，静态代码块，同步代码块。
+
+局部代码块
+定义：在方法、循环、判断等语句中出现的代码块修饰：只能用标签修饰位置：普通代码可以出现在方法体内除“()”外的任何地方，包括方法体，代码块（即可以嵌套在代码块中）执行：局部代码块依赖方法的执行而执行，按照正常的先后顺序执行作用：限定变量的生命周期，及早释放，提高内存的利用率
+
+构造代码块
+定义：在类中定义且没有加任何修饰的代码块位置：在类中，方法外出现，用{}括起来的代码执行：依赖构造函数的调用而执行作用：初始化实例变量和实例环境，一般用于提
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/09/Java/Java中的代码块/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/15/Java/Median-of-Two-Sorted-Arrays/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="挥斥方遒">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/20170511153115.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="挥斥方遒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/15/Java/Median-of-Two-Sorted-Arrays/" itemprop="url">Median of Two Sorted Arrays</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-15T11:17:42+08:00">
+                2017-10-15
               </time>
             
 
@@ -1815,191 +1821,7 @@ return the node with value 3.
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  428
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-Description:Implement strStr().Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
-
-
-
-暴力的解法如下：12345678910111213141516171819202122232425262728293031323334353637/*** @Title: strStr * @Description: 字符串匹配的暴力解法(时间复杂度O(n*m))* @param haystack 匹配串* @par
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/31/Java/KMP字符串匹配算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/leetcode/LRU/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="挥斥方遒">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/20170511153115.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="挥斥方遒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/30/leetcode/LRU/" itemprop="url">LRU Cache</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T22:45:10+08:00">
-                2017-08-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode解题报告/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode解题报告</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  715
+                  624
                 </span>
               
 
@@ -2039,11 +1861,194 @@ Description:Implement strStr().Returns the index of the first occurrence of need
         
           
           
-Description:Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and put.get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.put(key, value) - Set or insert the value 
+Description:There are two sorted arrays nums1 and nums2 of size m and n respectively.Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).Example 1:123nums1 = [1, 3]nums2 = [2]The median is 2.0
+
+
+Example 2:123nums1 = [1, 2]nums2 = [3, 4]The median is (2 +
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/30/leetcode/LRU/#more" rel="contents">
+            <a class="btn" href="/2017/10/15/Java/Median-of-Two-Sorted-Arrays/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/25/leetcode/quick-sort/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="挥斥方遒">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/20170511153115.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="挥斥方遒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/25/leetcode/quick-sort/" itemprop="url">快速排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T20:15:11+08:00">
+                2017-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode解题报告/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode解题报告</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  519
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最近在找工作的过程中，遇到最多的手写代码的题中，出现最多的算得上是“快速排序”了。有一般的让你写快速排序的，也有让你将递归的快速排序算法改成非递归的。也有让你为了避免出现“快速排序”最差性能的时候随机选主元的情况。现在分别对三种要求进行编码实现。
+递归实现的快速排序1234567891011121314151617181920public static void quickSort(int[] array,int start,int end)&#123;	if(start &lt; end)&#123;		int q = partition(array,start,end);		quickSo
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/25/leetcode/quick-sort/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2085,7 +2090,7 @@ Description:Design and implement a data structure for Least Recently Used (LRU) 
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2137,7 +2142,7 @@ Description:Design and implement a data structure for Least Recently Used (LRU) 
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2148,7 +2153,7 @@ Description:Design and implement a data structure for Least Recently Used (LRU) 
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2204,7 +2209,7 @@ Description:Design and implement a data structure for Least Recently Used (LRU) 
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2218,7 +2223,7 @@ Description:Design and implement a data structure for Least Recently Used (LRU) 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">43.7k</span>
+    <span title="Site words total count">51.1k</span>
   
 </div>
 

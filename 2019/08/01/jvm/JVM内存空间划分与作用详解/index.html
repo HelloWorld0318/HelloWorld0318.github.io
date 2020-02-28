@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="作为一名Java程序员，在编写程序时除了尽情发挥Java的各种优势外，还应该去了解和思考一下Java技术体系中这些技术特征是如何实现的。 一旦使用了关键字strictfp来生明某个类，接口或者方法时，那么在这个关键字声明的范围内的所有浮点运算都是精确的，符合ieee-754标准。 JDK1.5在Java语法的易用性上面做出了非常大的改进。例如：自动装箱、范型、动态注解、枚举、可变长参数、遍历循环（">
+<meta name="description" content="作为一名Java程序员，在编写程序时除了尽情发挥Java的各种优势外，还应该去了解和思考一下Java技术体系中这些技术特征是如何实现的。如果开发人员不了解虚拟机一些技术特性的运行原理，就无法写出最适合虚拟机运行和自优化的代码。 一旦使用了关键字strictfp来生明某个类，接口或者方法时，那么在这个关键字声明的范围内的所有浮点运算都是精确的，符合ieee-754标准。 JDK1.5在Java语法的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM内存空间划分与作用详解">
 <meta property="og:url" content="http://yoursite.com/2019/08/01/jvm/JVM内存空间划分与作用详解/index.html">
 <meta property="og:site_name" content="挥斥方遒">
-<meta property="og:description" content="作为一名Java程序员，在编写程序时除了尽情发挥Java的各种优势外，还应该去了解和思考一下Java技术体系中这些技术特征是如何实现的。 一旦使用了关键字strictfp来生明某个类，接口或者方法时，那么在这个关键字声明的范围内的所有浮点运算都是精确的，符合ieee-754标准。 JDK1.5在Java语法的易用性上面做出了非常大的改进。例如：自动装箱、范型、动态注解、枚举、可变长参数、遍历循环（">
+<meta property="og:description" content="作为一名Java程序员，在编写程序时除了尽情发挥Java的各种优势外，还应该去了解和思考一下Java技术体系中这些技术特征是如何实现的。如果开发人员不了解虚拟机一些技术特性的运行原理，就无法写出最适合虚拟机运行和自优化的代码。 一旦使用了关键字strictfp来生明某个类，接口或者方法时，那么在这个关键字声明的范围内的所有浮点运算都是精确的，符合ieee-754标准。 JDK1.5在Java语法的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-06T15:34:46.071Z">
+<meta property="og:updated_time" content="2019-11-17T09:11:19.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存空间划分与作用详解">
-<meta name="twitter:description" content="作为一名Java程序员，在编写程序时除了尽情发挥Java的各种优势外，还应该去了解和思考一下Java技术体系中这些技术特征是如何实现的。 一旦使用了关键字strictfp来生明某个类，接口或者方法时，那么在这个关键字声明的范围内的所有浮点运算都是精确的，符合ieee-754标准。 JDK1.5在Java语法的易用性上面做出了非常大的改进。例如：自动装箱、范型、动态注解、枚举、可变长参数、遍历循环（">
+<meta name="twitter:description" content="作为一名Java程序员，在编写程序时除了尽情发挥Java的各种优势外，还应该去了解和思考一下Java技术体系中这些技术特征是如何实现的。如果开发人员不了解虚拟机一些技术特性的运行原理，就无法写出最适合虚拟机运行和自优化的代码。 一旦使用了关键字strictfp来生明某个类，接口或者方法时，那么在这个关键字声明的范围内的所有浮点运算都是精确的，符合ieee-754标准。 JDK1.5在Java语法的">
 
 
 
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  837
+                  880
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -407,7 +407,7 @@
       
 
       
-        <p>作为一名Java程序员，在编写程序时除了尽情发挥Java的各种优势外，还应该去了解和思考一下Java技术体系中这些技术特征是如何实现的。</p>
+        <p>作为一名Java程序员，在编写程序时除了尽情发挥Java的各种优势外，还应该去了解和思考一下Java技术体系中这些技术特征是如何实现的。如果开发人员不了解虚拟机一些技术特性的运行原理，就无法写出最适合虚拟机运行和自优化的代码。</p>
 <p>一旦使用了关键字strictfp来生明某个类，接口或者方法时，那么在这个关键字声明的范围内的所有浮点运算都是精确的，符合ieee-754标准。</p>
 <p>JDK1.5在Java语法的易用性上面做出了非常大的改进。例如：自动装箱、范型、动态注解、枚举、可变长参数、遍历循环（foreach循环）等语法特性都是在JDK1.5中加入的。</p>
 <p>HotSpot VM的热点代码探测能力可以通过执行计数器找到最具有编译价值的代码，然后通过JIT编译器以方法为单位进行编译。如果一个方法被频繁调用，或方法中有效循环次数很多，将会分别触发标准编译和OSR（栈上替换）编译动作。通过编译器与解释器恰当地协同工作，可以在最优化的程序响应时间与最佳执行性能中取得平衡，而且无需等待本地代码输出才能执行程序，即使编译的时间压力也相对减少，这样有助于引入更多的代码优化技术，输出质量更高的本地代码。</p>
@@ -451,7 +451,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/01/LeetCode刷题分类/" rel="prev" title="LeetCode刷题分类">
+              <a href="/2019/08/01/leetcode/LeetCode刷题分类/" rel="prev" title="LeetCode刷题分类">
                 LeetCode刷题分类 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -536,7 +536,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -547,7 +547,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -619,7 +619,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -633,7 +633,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">43.7k</span>
+    <span title="Site words total count">51.1k</span>
   
 </div>
 
